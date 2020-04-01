@@ -8,7 +8,7 @@ This is the official python wrapper for the Blaze Verify API.
 
 ## Documentation
 
-See the [Python API docs](https://blazeverify.com/docs/api#python).
+See the [Python API docs](https://blazeverify.com/docs/api/?python).
 
 ## Installation
 
