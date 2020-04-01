@@ -25,7 +25,7 @@ setuptools.setup(
     tests_require=['nose'],
     project_urls={
         "Bug Tracker": "https://github.com/blazeverify/blazeverify-python/issues",
-        "Documentation": "https://docs.blazeverify.com/?python",
+        "Documentation": "https://blazeverify.com/docs/api",
         "Source Code": "https://github.com/blazeverify/blazeverify-python",
     },
     classifiers=[
