@@ -1,5 +1,9 @@
 # Blaze Verify Python Library
 
+[![Version](https://img.shields.io/pypi/v/blazeverify.svg)](https://pypi.org/project/blazeverify/)
+[![Build Status](https://travis-ci.com/blazeverify/blazeverify-python.svg)](https://travis-ci.com/blazeverify/blazeverify-python)
+[![Maintainability](https://api.codeclimate.com/v1/badges/dcb962c96795974051fc/maintainability)](https://codeclimate.com/github/blazeverify/blazeverify-python/maintainability)
+
 This is the official python wrapper for the Blaze Verify API.
 
 ## Documentation
@@ -14,7 +18,7 @@ pip install blazeverify
 
 ## Usage
 
-The library needs to be configured with your account's API key which is available in your [Blaze Verify Dashboard](https://app.blazeverify.com/api). 
+The library needs to be configured with your account's API key which is available in your [Blaze Verify Dashboard](https://app.blazeverify.com/api).
 
 ### Setup
 

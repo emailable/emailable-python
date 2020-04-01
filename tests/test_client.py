@@ -4,6 +4,7 @@ import blazeverify
 class TestClient(TestCase):
   def setUp(self):
     self.client = blazeverify.Client('test_7aff7fc0142c65f86a00')
+    self.response = self.client.verify('johndoe+tag@blazeverify.com')
 
   def test_invalid_api_key(self):
     client = blazeverify.Client('test_7aff7fc0141c65f86a00')
@@ -22,8 +23,7 @@ class TestClient(TestCase):
     )
   
   def test_verify_returns_response(self):
-    response = self.client.verify('evan@blazeverify.com')
-    self.assertIsInstance(response, blazeverify.Response)
+    self.assertIsInstance(self.response, blazeverify.Response)
   
   def test_verification_role(self):
     response = self.client.verify('role@example.com')
@@ -34,22 +34,20 @@ class TestClient(TestCase):
     self.assertEqual(response.state, 'deliverable')
 
   def test_verification_tag(self):
-    response = self.client.verify('evan+tag@blazeverify.com')
-    self.assertEqual(response.tag, 'tag')
+    self.assertEqual(self.response.tag, 'tag')
 
   def test_verification_name_and_gender(self):
-    response = self.client.verify('johndoe@blazeverify.com')
     # name and gender checks only get run for certain verification states
-    if response.state in ['deliverable', 'risky', 'unknown']:
-      self.assertEqual(response.first_name, 'John')
-      self.assertEqual(response.last_name, 'Doe')
-      self.assertEqual(response.full_name, 'John Doe')
-      self.assertEqual(response.gender, 'male')
+    if self.response.state in ['deliverable', 'risky', 'unknown']:
+      self.assertEqual(self.response.first_name, 'John')
+      self.assertEqual(self.response.last_name, 'Doe')
+      self.assertEqual(self.response.full_name, 'John Doe')
+      self.assertEqual(self.response.gender, 'male')
     else:
-      self.assertIsNone(response.first_name)
-      self.assertIsNone(response.last_name)
-      self.assertIsNone(response.full_name)
-      self.assertIsNone(response.gender)
+      self.assertIsNone(self.response.first_name)
+      self.assertIsNone(self.response.last_name)
+      self.assertIsNone(self.response.full_name)
+      self.assertIsNone(self.response.gender)
 
   def test_batch_creation(self):
     response = self.client.batch(
