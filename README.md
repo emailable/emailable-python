@@ -1,45 +1,43 @@
-# Blaze Verify Python Library
+# Emailable Python Library
 
-[![Version](https://img.shields.io/pypi/v/blazeverify.svg)](https://pypi.org/project/blazeverify/)
-[![Build Status](https://travis-ci.com/blazeverify/blazeverify-python.svg)](https://travis-ci.com/blazeverify/blazeverify-python)
-[![Maintainability](https://api.codeclimate.com/v1/badges/dcb962c96795974051fc/maintainability)](https://codeclimate.com/github/blazeverify/blazeverify-python/maintainability)
+[![Version](https://img.shields.io/pypi/v/emailable.svg)](https://pypi.org/project/emailable/)
+[![Build Status](https://travis-ci.com/emailable/emailable-python.svg)](https://travis-ci.com/emailable/emailable-python)
+[![Maintainability](https://api.codeclimate.com/v1/badges/dcb962c96795974051fc/maintainability)](https://codeclimate.com/github/emailable/emailable-python/maintainability)
 
-**Blaze Verify is now Emailable! Please switch to using the Emailable client library: https://emailable.com/docs/api?python**
-
-This is the official python wrapper for the Blaze Verify API.
+This is the official python wrapper for the Emailable API.
 
 ## Documentation
 
-See the [Python API docs](https://blazeverify.com/docs/api/?python).
+See the [Python API docs](https://emailable.com/docs/api/?python).
 
 ## Installation
 
 ```shell
-pip install blazeverify
+pip install emailable
 ```
 
 ## Usage
 
-The library needs to be configured with your account's API key which is available in your [Blaze Verify Dashboard](https://app.blazeverify.com/api).
+The library needs to be configured with your account's API key which is available in your [Emailable Dashboard](https://app.emailable.com/api).
 
 ### Setup
 
 ```python
-import blazeverify
+import emailable
 
-client = blazeverify.Client('live_...')
+client = emailable.Client('live_...')
 ```
 
 ### Verification
 
 ```python
 # verify an email address
-response = client.verify('evan@blazeverify.com')
+response = client.verify('evan@emailable.com')
 response.state
 => 'deliverable'
 
 # additional parameters are available. see API docs for additional info.
-client.verify('evan@blazeverify.com', smtp=False, accept_all=True, timeout=25)
+client.verify('evan@emailable.com', smtp=False, accept_all=True, timeout=25)
 ```
 
 #### Slow Email Server Handling
@@ -66,14 +64,14 @@ response.message
 #### Start a batch
 
 ```python
-emails = ['evan@blazeverify.com', 'support@blazeverify.com', ...]
+emails = ['evan@emailable.com', 'support@emailable.com', ...]
 response = client.batch(emails)
 response.id
 => '5cff27400000000000000000'
 
 # you can optionally pass in a callback url that we'll POST to when the
 # batch is complete.
-response = client.batch(emails, callback_url='https://blazeverify.com/')
+response = client.batch(emails, callback_url='https://emailable.com/')
 ```
 
 #### Get the status / results of a batch
@@ -93,7 +91,7 @@ response.message
 
 # if your batch is complete
 response.emails
-=> [{'email': 'evan@blazeverify.com', 'state': 'deliverable'...}, {'email': 'support@blazeverify.com', 'state': 'deliverable'...}...]
+=> [{'email': 'evan@emailable.com', 'state': 'deliverable'...}, {'email': 'support@emailable.com', 'state': 'deliverable'...}...]
 
 # get the counts
 response.total_counts
@@ -107,9 +105,9 @@ response.reason_counts
 Tests can be run with the following command:
 
 ```shell
-python setup test
+python setup.py test
 ```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/blazeverify/blazeverify-python.
+Bug reports and pull requests are welcome on GitHub at https://github.com/emailable/emailable-python.
