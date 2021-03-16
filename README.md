@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.com/blazeverify/blazeverify-python.svg)](https://travis-ci.com/blazeverify/blazeverify-python)
 [![Maintainability](https://api.codeclimate.com/v1/badges/dcb962c96795974051fc/maintainability)](https://codeclimate.com/github/blazeverify/blazeverify-python/maintainability)
 
+**Blaze Verify is now Emailable! Please switch to using the Emailable client library: https://emailable.com/docs/api?python**
+
 This is the official python wrapper for the Blaze Verify API.
 
 ## Documentation
