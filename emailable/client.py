@@ -8,7 +8,7 @@ class Client:
 
   def __init__(self, api_key):
     self.api_key = api_key
-    self.base_url = 'https://api.blazeverify.com/v1/'
+    self.base_url = 'https://api.emailable.com/v1/'
 
   def verify(self, email, smtp=True, accept_all=False, timeout=None):
     params = {

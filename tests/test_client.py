@@ -1,29 +1,29 @@
 from unittest import TestCase
-import blazeverify
+import emailable
 
 class TestClient(TestCase):
   def setUp(self):
-    self.client = blazeverify.Client('test_7aff7fc0142c65f86a00')
-    self.response = self.client.verify('johndoe+tag@blazeverify.com')
+    self.client = emailable.Client('test_7aff7fc0142c65f86a00')
+    self.response = self.client.verify('johndoe+tag@emailable.com')
 
   def test_invalid_api_key(self):
-    client = blazeverify.Client('test_7aff7fc0141c65f86a00')
+    client = emailable.Client('test_7aff7fc0141c65f86a00')
     self.assertRaises(
-      blazeverify.AuthError,
+      emailable.AuthError,
       client.verify,
-      'evan@blazeverify.com'
+      'evan@emailable.com'
     )
 
   def test_missing_api_key(self):
     self.client.api_key = None
     self.assertRaises(
-      blazeverify.AuthError,
+      emailable.AuthError,
       self.client.verify,
-      'evan@blazeverify.com'
+      'evan@emailable.com'
     )
   
   def test_verify_returns_response(self):
-    self.assertIsInstance(self.response, blazeverify.Response)
+    self.assertIsInstance(self.response, emailable.Response)
   
   def test_verification_role(self):
     response = self.client.verify('role@example.com')
@@ -51,7 +51,7 @@ class TestClient(TestCase):
 
   def test_batch_creation(self):
     response = self.client.batch(
-      ['evan@blazeverify.com', 'jarrett@blazeverify.com']
+      ['evan@emailable.com', 'jarrett@emailable.com']
     )
     self.assertIsNotNone(response.id)
   

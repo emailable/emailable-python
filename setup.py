@@ -7,16 +7,16 @@ with open("VERSION", "r") as version_file:
     version = version_file.read().strip()
 
 setuptools.setup(
-    name="blazeverify",
+    name="emailable",
     version=version,
-    author="Blaze Verify",
-    author_email="support@blazeverify.com",
-    description="This is the official python wrapper for the Blaze Verify API.",
+    author="Emailable",
+    author_email="support@emailable.com",
+    description="This is the official python wrapper for the Emailable API.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/blazeverify/blazeverify-python",
+    url="https://github.com/emailable/emailable-python",
     license="MIT",
-    keywords="blazeverify email verification",
+    keywords="emailable email verification",
     packages=setuptools.find_packages(),
     install_requires = [
         'requests'
@@ -24,9 +24,9 @@ setuptools.setup(
     test_suite='nose.collector',
     tests_require=['nose'],
     project_urls={
-        "Bug Tracker": "https://github.com/blazeverify/blazeverify-python/issues",
-        "Documentation": "https://blazeverify.com/docs/api",
-        "Source Code": "https://github.com/blazeverify/blazeverify-python",
+        "Bug Tracker": "https://github.com/emailable/emailable-python/issues",
+        "Documentation": "https://emailable.com/docs/api?python",
+        "Source Code": "https://github.com/emailable/emailable-python",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
