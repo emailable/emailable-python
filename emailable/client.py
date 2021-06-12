@@ -20,7 +20,7 @@ class Client:
     }
 
     url = self.base_url + 'verify'
-    return self.__request('get', url, params)
+    return self.__request('get', url, {'params': params})
 
   def batch(self, emails, callback_url = None):
     if isinstance(emails, list):
@@ -28,11 +28,15 @@ class Client:
 
     params = {
         'api_key': self.api_key,
-        'emails': emails,
         'url': callback_url
     }
+
+    json = {
+      'emails': emails
+    }
+
     url = self.base_url + 'batch'
-    return self.__request('post', url, params)
+    return self.__request('post', url, {'params': params, 'json': json})
 
   def batch_status(self, batch_id):
     params = {
@@ -41,7 +45,7 @@ class Client:
     }
 
     url = self.base_url + 'batch'
-    return self.__request('get', url, params)
+    return self.__request('get', url, {'params': params})
 
   def account(self):
     params = {
@@ -49,11 +53,9 @@ class Client:
     }
 
     url = self.base_url + 'account'
-    return self.__request('get', url, params)
+    return self.__request('get', url, {'params': params})
 
-  def __request(self, method, url, params):
-    options = { 'params': params }
-
+  def __request(self, method, url, options):
     try:
       response = requests.request(method, url, **options)
       response.raise_for_status()
