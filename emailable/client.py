@@ -11,49 +11,56 @@ class Client:
     self.base_url = 'https://api.emailable.com/v1/'
 
   def verify(self, email, smtp=True, accept_all=False, timeout=None):
-    params = {
-      'api_key': self.api_key,
-      'email': email,
-      'smtp': str(smtp).lower(),
-      'accept_all': str(accept_all).lower(),
-      'timeout': timeout
+    options = {
+      'params': {
+        'api_key': self.api_key,
+        'email': email,
+        'smtp': str(smtp).lower(),
+        'accept_all': str(accept_all).lower(),
+        'timeout': timeout
+      }
     }
 
     url = self.base_url + 'verify'
-    return self.__request('get', url, params)
+    return self.__request('get', url, options)
 
-  def batch(self, emails, callback_url = None):
-    if isinstance(emails, list):
-      emails = ','.join(emails)
-
-    params = {
+  def batch(self, emails, callback_url=None, simulate=None):
+    options = {
+      'params': {
         'api_key': self.api_key,
-        'emails': emails,
-        'url': callback_url
+        'url': callback_url,
+        'simulate': simulate
+      },
+      'json': {
+        'emails': emails
+      }
     }
     url = self.base_url + 'batch'
-    return self.__request('post', url, params)
+    return self.__request('post', url, options)
 
-  def batch_status(self, batch_id):
-    params = {
+  def batch_status(self, batch_id, simulate=None):
+    options = {
+      'params': {
         'api_key': self.api_key,
-        'id': batch_id
+        'id': batch_id,
+        'simulate': simulate
+      }
     }
 
     url = self.base_url + 'batch'
-    return self.__request('get', url, params)
+    return self.__request('get', url, options)
 
   def account(self):
-    params = {
+    options = {
+      'params': {
         'api_key': self.api_key
+      }
     }
 
     url = self.base_url + 'account'
-    return self.__request('get', url, params)
+    return self.__request('get', url, options)
 
-  def __request(self, method, url, params):
-    options = { 'params': params }
-
+  def __request(self, method, url, options):
     try:
       response = requests.request(method, url, **options)
       response.raise_for_status()
