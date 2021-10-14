@@ -1,10 +1,12 @@
 from unittest import TestCase
 import emailable
+import time
 
 class TestClient(TestCase):
   def setUp(self):
     self.client = emailable.Client('test_7aff7fc0142c65f86a00')
     self.response = self.client.verify('johndoe+tag@emailable.com')
+    time.sleep(0.25)
 
   def test_invalid_api_key(self):
     client = emailable.Client('test_7aff7fc0141c65f86a00')
@@ -21,10 +23,10 @@ class TestClient(TestCase):
       self.client.verify,
       'evan@emailable.com'
     )
-  
+
   def test_verify_returns_response(self):
     self.assertIsInstance(self.response, emailable.Response)
-  
+
   def test_verification_role(self):
     response = self.client.verify('role@example.com')
     self.assertTrue(response.role)
@@ -54,9 +56,12 @@ class TestClient(TestCase):
       ['evan@emailable.com', 'jarrett@emailable.com']
     )
     self.assertIsNotNone(response.id)
-  
+
   def test_batch_status(self):
-    response = self.client.batch_status('5cff27400000000000000000')
+    response = self.client.batch(
+      ['evan@emailable.com', 'jarrett@emailable.com']
+    )
+    response = self.client.batch_status(response.id)
     self.assertIsNotNone(response.emails)
     self.assertIsNotNone(response.id)
     self.assertIsNotNone(response.reason_counts)
