@@ -1,7 +1,7 @@
 # Emailable Python Library
 
 [![Version](https://img.shields.io/pypi/v/emailable.svg)](https://pypi.org/project/emailable/)
-[![Build Status](https://travis-ci.com/emailable/emailable-python.svg)](https://travis-ci.com/emailable/emailable-python)
+[![Build Status](https://app.travis-ci.com/emailable/emailable-python.svg)](https://app.travis-ci.com/emailable/emailable-python)
 [![Maintainability](https://api.codeclimate.com/v1/badges/dcb962c96795974051fc/maintainability)](https://codeclimate.com/github/emailable/emailable-python/maintainability)
 
 This is the official python wrapper for the Emailable API.
