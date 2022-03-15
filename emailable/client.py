@@ -24,12 +24,11 @@ class Client:
     url = self.base_url + 'verify'
     return self.__request('get', url, options)
 
-  def batch(self, emails, callback_url=None, simulate=None):
+  def batch(self, emails, params={}):
     options = {
       'params': {
-        'api_key': self.api_key,
-        'url': callback_url,
-        'simulate': simulate
+        **{'api_key': self.api_key},
+        **params
       },
       'json': {
         'emails': emails
