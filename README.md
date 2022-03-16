@@ -71,7 +71,7 @@ response.id
 
 # you can optionally pass in a callback url that we'll POST to when the
 # batch is complete.
-response = client.batch(emails, callback_url='https://emailable.com/')
+response = client.batch(emails, {'callback_url': 'https://emailable.com/'})
 ```
 
 #### Get the status / results of a batch
