@@ -58,12 +58,12 @@ class TestClient(TestCase):
       ['evan@emailable.com', 'jarrett@emailable.com']
     )
     self.assertIsNotNone(response.id)
-  
+
   def test_batch_creation_with_params(self):
     with self.assertRaises(emailable.error.ClientError):
       self.client.batch(
         ['evan@emailable.com', 'jarrett@emailable.com'],
-        {'callback_url': 'test@example.org', 'simulate': 'generic_error'}
+        {'url': 'test@example.org', 'simulate': 'generic_error'}
       )
 
   def test_batch_status(self):
