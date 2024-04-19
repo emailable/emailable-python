@@ -1,7 +1,7 @@
 # Emailable Python Library
 
 [![Version](https://img.shields.io/pypi/v/emailable.svg)](https://pypi.org/project/emailable/)
-[![Build Status](https://app.travis-ci.com/emailable/emailable-python.svg)](https://app.travis-ci.com/emailable/emailable-python)
+![Build Status](https://github.com/emailable/emailable-python/actions/workflows/ci.yml/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/dcb962c96795974051fc/maintainability)](https://codeclimate.com/github/emailable/emailable-python/maintainability)
 
 This is the official python wrapper for the Emailable API.
@@ -105,7 +105,7 @@ response.reason_counts
 Tests can be run with the following command:
 
 ```shell
-python setup.py test
+pytest
 ```
 
 ## Contributing
