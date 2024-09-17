@@ -60,6 +60,7 @@ class Client:
     return self.__request('get', url, options)
 
   def __request(self, method, url, options):
+    response = None
     try:
       response = requests.request(method, url, **options)
       response.raise_for_status()
@@ -68,8 +69,8 @@ class Client:
       self.__handle_error(e, response)
 
   def __handle_error(self, e, response):
-    status_code = response.status_code
-    message = response.json()['message']
+    status_code = response.status_code if response is not None else None
+    message = response.json()['message'] if response is not None else None
     if status_code == 401 or status_code == 403:
       raise AuthError(message)
     elif status_code == 402:
