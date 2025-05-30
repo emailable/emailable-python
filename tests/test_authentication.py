@@ -1,6 +1,5 @@
 from unittest import TestCase
 import emailable
-import time
 
 class TestAuthentication(TestCase):
 
