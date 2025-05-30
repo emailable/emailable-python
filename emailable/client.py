@@ -6,14 +6,22 @@ from .error import (ClientError, AuthError, PaymentRequiredError,
 
 class Client:
 
-  def __init__(self, api_key):
+  def __init__(self, api_key=None):
     self.api_key = api_key
     self.base_url = 'https://api.emailable.com/v1/'
 
-  def verify(self, email, smtp=True, accept_all=False, timeout=None):
+  def verify(self,
+             email,
+             smtp=True,
+             accept_all=False,
+             timeout=None,
+             api_key=None,
+             access_token=None):
     options = {
+      'headers': { 
+        'Authorization': f'Bearer {self.api_key or api_key or access_token}'
+      },
       'params': {
-        'api_key': self.api_key,
         'email': email,
         'smtp': str(smtp).lower(),
         'accept_all': str(accept_all).lower(),
@@ -24,10 +32,12 @@ class Client:
     url = self.base_url + 'verify'
     return self.__request('get', url, options)
 
-  def batch(self, emails, params={}):
+  def batch(self, emails, params={}, api_key=None, access_token=None):
     options = {
+      'headers': { 
+        'Authorization': f'Bearer {self.api_key or api_key or access_token}'
+      },
       'params': {
-        **{'api_key': self.api_key},
         **params
       },
       'json': {
@@ -37,10 +47,16 @@ class Client:
     url = self.base_url + 'batch'
     return self.__request('post', url, options)
 
-  def batch_status(self, batch_id, simulate=None):
+  def batch_status(self,
+                   batch_id,
+                   simulate=None,
+                   api_key=None,
+                   access_token=None):
     options = {
+      'headers': { 
+        'Authorization': f'Bearer {self.api_key or api_key or access_token}'
+      },
       'params': {
-        'api_key': self.api_key,
         'id': batch_id,
         'simulate': simulate
       }
@@ -49,11 +65,11 @@ class Client:
     url = self.base_url + 'batch'
     return self.__request('get', url, options)
 
-  def account(self):
+  def account(self, api_key=None, access_token=None):
     options = {
-      'params': {
-        'api_key': self.api_key
-      }
+      'headers': { 
+        'Authorization': f'Bearer {self.api_key or api_key or access_token}'
+      },
     }
 
     url = self.base_url + 'account'

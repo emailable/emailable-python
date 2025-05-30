@@ -22,10 +22,21 @@ The library needs to be configured with your account's API key which is availabl
 
 ### Setup
 
+When using an API key you can initialize the client to use it for all future
+requests.
+
 ```python
 import emailable
 
 client = emailable.Client('live_...')
+```
+
+Alternatively, you can pass an OAuth access token to any of the endpoints. See
+[here](https://emailable.com/docs/api/#oauth) for more details.
+
+```python
+client = emailable.Client()
+client.verify('evan@emailable.com', access_token=<access_token>)
 ```
 
 ### Verification
@@ -36,7 +47,7 @@ response = client.verify('evan@emailable.com')
 response.state
 => 'deliverable'
 
-# additional parameters are available. see API docs for additional info.
+# additional parameters are available. see API docs for more info.
 client.verify('evan@emailable.com', smtp=False, accept_all=True, timeout=25)
 ```
 

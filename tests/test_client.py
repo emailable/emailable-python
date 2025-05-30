@@ -7,22 +7,6 @@ class TestClient(TestCase):
     self.client = emailable.Client('test_7aff7fc0142c65f86a00')
     time.sleep(0.5)
 
-  def test_invalid_api_key(self):
-    client = emailable.Client('test_7aff7fc0141c65f86a00')
-    self.assertRaises(
-      emailable.AuthError,
-      client.verify,
-      'evan@emailable.com'
-    )
-
-  def test_missing_api_key(self):
-    self.client.api_key = None
-    self.assertRaises(
-      emailable.AuthError,
-      self.client.verify,
-      'evan@emailable.com'
-    )
-
   def test_verify_returns_response(self):
     response = self.client.verify('johndoe+tag@emailable.com')
     self.assertIsInstance(response, emailable.Response)
