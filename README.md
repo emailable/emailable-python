@@ -18,14 +18,26 @@ pip install emailable
 
 ## Usage
 
-The library needs to be configured with your account's API key which is available in your [Emailable Dashboard](https://app.emailable.com/api).
+### Authentication
 
-### Setup
+The Emailable API requires either an API key or an access token for
+authentication. API keys can be created and managed in the
+[Emailable Dashboard](https://app.emailable.com/api).
+
+An API key can be set globally for the Emailable client:
 
 ```python
-import emailable
+client = emailable.Client('your_api_key')
+```
 
-client = emailable.Client('live_...')
+Or, you can specify an `api_key` or an `access_token` with each request:
+
+```python
+# set api_key at request time
+client.verify(api_key='your_api_key')
+
+# set access_token at request time
+client.verify(access_token='your_access_token')
 ```
 
 ### Verification
@@ -36,7 +48,7 @@ response = client.verify('evan@emailable.com')
 response.state
 => 'deliverable'
 
-# additional parameters are available. see API docs for additional info.
+# additional parameters are available. see API docs for more info.
 client.verify('evan@emailable.com', smtp=False, accept_all=True, timeout=25)
 ```
 

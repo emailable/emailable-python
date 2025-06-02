@@ -6,14 +6,19 @@ from .error import (ClientError, AuthError, PaymentRequiredError,
 
 class Client:
 
-  def __init__(self, api_key):
+  def __init__(self, api_key=None):
     self.api_key = api_key
     self.base_url = 'https://api.emailable.com/v1/'
 
-  def verify(self, email, smtp=True, accept_all=False, timeout=None):
+  def verify(self,
+             email,
+             smtp=True,
+             accept_all=False,
+             timeout=None,
+             api_key=None,
+             access_token=None):
     options = {
       'params': {
-        'api_key': self.api_key,
         'email': email,
         'smtp': str(smtp).lower(),
         'accept_all': str(accept_all).lower(),
@@ -22,12 +27,11 @@ class Client:
     }
 
     url = self.base_url + 'verify'
-    return self.__request('get', url, options)
+    return self.__request('get', url, options, api_key or access_token)
 
-  def batch(self, emails, params={}):
+  def batch(self, emails, params={}, api_key=None, access_token=None):
     options = {
       'params': {
-        **{'api_key': self.api_key},
         **params
       },
       'json': {
@@ -35,32 +39,32 @@ class Client:
       }
     }
     url = self.base_url + 'batch'
-    return self.__request('post', url, options)
+    return self.__request('post', url, options, api_key or access_token)
 
-  def batch_status(self, batch_id, simulate=None):
+  def batch_status(self,
+                   batch_id,
+                   simulate=None,
+                   api_key=None,
+                   access_token=None):
     options = {
       'params': {
-        'api_key': self.api_key,
         'id': batch_id,
         'simulate': simulate
       }
     }
 
     url = self.base_url + 'batch'
-    return self.__request('get', url, options)
+    return self.__request('get', url, options, api_key or access_token)
 
-  def account(self):
-    options = {
-      'params': {
-        'api_key': self.api_key
-      }
-    }
-
+  def account(self, api_key=None, access_token=None):
     url = self.base_url + 'account'
-    return self.__request('get', url, options)
+    return self.__request('get', url, {}, api_key or access_token)
 
-  def __request(self, method, url, options):
+  def __request(self, method, url, options, key_or_token):
     response = None
+    options['headers'] = { 
+      'Authorization': f'Bearer {key_or_token or self.api_key}'
+    }
     try:
       response = requests.request(method, url, **options)
       response.raise_for_status()
