@@ -18,9 +18,6 @@ class Client:
              api_key=None,
              access_token=None):
     options = {
-      'headers': { 
-        'Authorization': f'Bearer {self.api_key or api_key or access_token}'
-      },
       'params': {
         'email': email,
         'smtp': str(smtp).lower(),
@@ -30,13 +27,10 @@ class Client:
     }
 
     url = self.base_url + 'verify'
-    return self.__request('get', url, options)
+    return self.__request('get', url, options, api_key or access_token)
 
   def batch(self, emails, params={}, api_key=None, access_token=None):
     options = {
-      'headers': { 
-        'Authorization': f'Bearer {self.api_key or api_key or access_token}'
-      },
       'params': {
         **params
       },
@@ -45,7 +39,7 @@ class Client:
       }
     }
     url = self.base_url + 'batch'
-    return self.__request('post', url, options)
+    return self.__request('post', url, options, api_key or access_token)
 
   def batch_status(self,
                    batch_id,
@@ -53,9 +47,6 @@ class Client:
                    api_key=None,
                    access_token=None):
     options = {
-      'headers': { 
-        'Authorization': f'Bearer {self.api_key or api_key or access_token}'
-      },
       'params': {
         'id': batch_id,
         'simulate': simulate
@@ -63,20 +54,17 @@ class Client:
     }
 
     url = self.base_url + 'batch'
-    return self.__request('get', url, options)
+    return self.__request('get', url, options, api_key or access_token)
 
   def account(self, api_key=None, access_token=None):
-    options = {
-      'headers': { 
-        'Authorization': f'Bearer {self.api_key or api_key or access_token}'
-      },
-    }
-
     url = self.base_url + 'account'
-    return self.__request('get', url, options)
+    return self.__request('get', url, {}, api_key or access_token)
 
-  def __request(self, method, url, options):
+  def __request(self, method, url, options, key_or_token):
     response = None
+    options['headers'] = { 
+      'Authorization': f'Bearer {key_or_token or self.api_key}'
+    }
     try:
       response = requests.request(method, url, **options)
       response.raise_for_status()
