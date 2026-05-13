@@ -7,7 +7,7 @@ This is the official python wrapper for the Emailable API.
 
 ## Documentation
 
-See the [Python API docs](https://emailable.com/docs/api/?python).
+See the [Python API docs](https://emailable.com/docs/api/?code_language=python).
 
 ## Installation
 
