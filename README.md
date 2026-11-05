@@ -119,6 +119,13 @@ Tests can be run with the following command:
 pytest
 ```
 
+## Cutting a Release
+
+Run `make release VERSION=x.y.z` on an up to date `master` with a clean tree,
+then `git push --follow-tags`. It runs the tests, bumps `VERSION`, commits,
+and tags `x.y.z`. Pushing the tag triggers the release workflow, which
+publishes to PyPI and creates the GitHub release.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/emailable/emailable-python.
