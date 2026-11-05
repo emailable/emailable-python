@@ -21,8 +21,6 @@ setuptools.setup(
     install_requires = [
         'requests'
     ],
-    test_suite='nose.collector',
-    tests_require=['nose'],
     project_urls={
         "Bug Tracker": "https://github.com/emailable/emailable-python/issues",
         "Documentation": "https://emailable.com/docs/api?python",
@@ -30,7 +28,6 @@ setuptools.setup(
     },
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
