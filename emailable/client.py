@@ -5,6 +5,8 @@ from .error import (ClientError, AuthError, PaymentRequiredError,
                     ServerUnavailableError)
 
 class Client:
+  open_timeout = 30
+  read_timeout = 60
 
   def __init__(self, api_key=None):
     self.api_key = api_key
@@ -65,6 +67,10 @@ class Client:
     options['headers'] = { 
       'Authorization': f'Bearer {key_or_token or self.api_key}'
     }
+    # requests treats None as "wait forever".
+    if self.open_timeout is None or self.read_timeout is None:
+      raise ValueError('open_timeout and read_timeout cannot be None')
+    options['timeout'] = (self.open_timeout, self.read_timeout)
     try:
       response = requests.request(method, url, **options)
       response.raise_for_status()
@@ -74,7 +80,7 @@ class Client:
 
   def __handle_error(self, e, response):
     status_code = response.status_code if response is not None else None
-    message = response.json()['message'] if response is not None else None
+    message = response.json()['message'] if response is not None else str(e)
     if status_code == 401 or status_code == 403:
       raise AuthError(message)
     elif status_code == 402:
