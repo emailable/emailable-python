@@ -39,6 +39,21 @@ client.verify(api_key='your_api_key')
 client.verify(access_token='your_access_token')
 ```
 
+### Timeouts
+
+By default, the client waits up to 30 seconds to connect and up to 60 seconds
+for the server to send data before raising `emailable.ClientError`. The read
+timeout applies to each wait between bytes, not to the whole response. Both
+must be positive numbers of seconds. To change them for every client:
+
+```python
+emailable.Client.open_timeout = 10
+emailable.Client.read_timeout = 45
+```
+
+The read timeout is separate from the `timeout` argument to `verify`, which
+tells the API how long to spend verifying before returning a 249 response.
+
 ### Verification
 
 ```python
